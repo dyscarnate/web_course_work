@@ -1,0 +1,17 @@
+doctype html
+html
+  head
+    title Добавить данные о головной боли
+    link(rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css")
+  body
+    .container
+      h1 Добавить данные о головной боли
+      form(action="/headache/add", method="POST")
+        .form-group
+          label(for="level") Уровень боли (1-10):
+          input.form-control(type="number", name="level", required, min="1", max="10")
+        .form-group
+          label(for="comment") Комментарий:
+          input.form-control(type="text", name="comment")
+        .form-group
+          button.btn.btn-primary(type="submit") Добавить

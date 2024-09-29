@@ -1,0 +1,27 @@
+{
+  "name": "123",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^9.0.1",
+    "nodemon": "^3.1.4"
+  },
+  "dependencies": {
+    "@auth0/auth0-spa-js": "^1.6.2",
+    "axios": "^1.7.7",
+    "bootstrap": "^5.3.3",
+    "express": "^4.17.1",
+    "express-session": "^1.18.0",
+    "if-env": "^1.0.4",
+    "mongoose": "^5.8.9",
+    "morgan": "^1.9.1",
+    "open-iconic": "^1.1.1",
+    "pug": "^3.0.3",
+    "save": "^2.4.0"
+  }
+}

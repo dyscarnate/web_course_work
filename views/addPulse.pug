@@ -1,0 +1,14 @@
+doctype html
+html
+  head
+    title Добавить данные о пульсе
+    link(rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css")
+  body
+    .container
+      h1 Добавить данные о пульсе
+      form(action="/pulse/add", method="POST")
+        .form-group
+          label(for="pulse") Пульс:
+          input.form-control(type="number", name="pulse", required)
+        .form-group
+          button.btn.btn-primary(type="submit") Добавить

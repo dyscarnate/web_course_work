@@ -1,0 +1,64 @@
+doctype html
+html
+  head
+    title Записи о пульсе
+    link(rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css")
+    script(src="https://cdn.jsdelivr.net/npm/chart.js")
+  body
+    .container
+      h1 Записи о пульсе
+      a.btn.btn-secondary.mb-4(href="/dashboard") На главную
+      div(style="width: 600px; margin: auto;")
+        canvas#pulseChart(width="600" height="400")
+
+      script.
+        const ctx = document.getElementById('pulseChart').getContext('2d');
+        const pulseData = !{JSON.stringify(pulseData)};
+
+        const labels = pulseData.map(pulse => new Date(pulse.date).toLocaleString());
+        const data = pulseData.map(pulse => pulse.pulse);
+
+        const pulseChart = new Chart(ctx, {
+          type: 'line',
+          data: {
+            labels: labels,
+            datasets: [{
+              label: 'Пульс',
+              data: data,
+              borderColor: 'rgba(54, 162, 235, 1)',
+              backgroundColor: 'rgba(54, 162, 235, 0.2)',
+              fill: true,
+            }]
+          },
+          options: {
+            responsive: true,
+            plugins: {
+              tooltip: {
+                callbacks: {
+                  label: function(tooltipItem) {
+                    return `Дата: ${labels[tooltipItem.dataIndex]}, Пульс: ${data[tooltipItem.dataIndex]}`;
+                  }
+                }
+              }
+            },
+            scales: {
+              x: {
+                title: {
+                  display: true,
+                  text: 'Дата'
+                },
+                ticks: {
+                  autoSkip: false,
+                  maxRotation: 45,
+                  minRotation: 45,
+                }
+              },
+              y: {
+                title: {
+                  display: true,
+                  text: 'Пульс'
+                }
+              }
+            }
+          }
+        });

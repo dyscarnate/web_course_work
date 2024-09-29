@@ -1,0 +1,65 @@
+doctype html
+html
+  head
+    title Записи о головной боли
+    link(rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css")
+    script(src="https://cdn.jsdelivr.net/npm/chart.js")
+  body
+    .container
+      h1 Записи о головной боли
+      a.btn.btn-secondary.mb-4(href="/dashboard") На главную
+      div(style="width: 600px; margin: auto;")
+        canvas#headacheChart(width="600" height="400")
+
+      script.
+        const ctx = document.getElementById('headacheChart').getContext('2d');
+        const headacheData = !{JSON.stringify(headacheData)};
+
+        const labels = headacheData.map(headache => new Date(headache.date).toLocaleString());
+        const data = headacheData.map(headache => headache.level);
+        const comments = headacheData.map(headache => headache.comment);
+
+        const headacheChart = new Chart(ctx, {
+          type: 'line',
+          data: {
+            labels: labels,
+            datasets: [{
+              label: 'Уровень боли (1-10)',
+              data: data,
+              borderColor: 'rgba(255, 99, 132, 1)',
+              backgroundColor: 'rgba(255, 99, 132, 0.2)',
+              fill: true,
+            }]
+          },
+          options: {
+            responsive: true,
+            plugins: {
+              tooltip: {
+                callbacks: {
+                  label: function(tooltipItem) {
+                    return `Дата: ${labels[tooltipItem.dataIndex]}, Боль: ${data[tooltipItem.dataIndex]}, Комментарий: ${comments[tooltipItem.dataIndex] || 'Нет комментария'}`;
+                  }
+                }
+              }
+            },
+            scales: {
+              x: {
+                title: {
+                  display: true,
+                  text: 'Дата'
+                },
+                ticks: {
+                  autoSkip: false,
+                  maxRotation: 45,
+                  minRotation: 45,
+                }
+              },
+              y: {
+                title: {
+                  display: true,
+                  text: 'Уровень боли (1-10)'
+                }
+              }
+            }
+          }
+        });

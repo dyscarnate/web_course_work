@@ -1,0 +1,49 @@
+doctype html
+html
+  head
+    title Панель управления
+    link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css")
+  body
+    .container
+      h1 Панель управления
+      p Добро пожаловать, #{username}!
+      
+      // Секция для управления уровнем глюкозы
+      .row
+        .col-md-6
+          h2 Управление уровнем глюкозы
+          ul.list-group
+            li.list-group-item
+              a(href="/glucose/add", class="btn btn-primary") Добавить данные о глюкозе
+            li.list-group-item
+              a(href="/glucose/all", class="btn btn-secondary") Просмотреть записи о глюкозе
+
+      // Секция для управления головной болью
+      .row
+        .col-md-6
+          h2 Управление головной болью
+          ul.list-group
+            li.list-group-item
+              a(href="/headache/add", class="btn btn-primary") Добавить данные о головной боли
+            li.list-group-item
+              a(href="/headache/all", class="btn btn-secondary") Просмотреть записи о головной боли
+
+      // Секция для управления пульсом
+      .row
+        .col-md-6
+          h2 Управление пульсом
+          ul.list-group
+            li.list-group-item
+              a(href="/pulse/add", class="btn btn-primary") Добавить данные о пульсе
+            li.list-group-item
+              a(href="/pulse/all", class="btn btn-secondary") Просмотреть записи о пульсе
+
+      // Секция аккаунта
+      .row
+        .col-md-6
+          h2 Аккаунт
+          ul.list-group
+            li.list-group-item
+              a(href="/profile", class="btn btn-info") Просмотреть профиль
+            li.list-group-item
+              a(href="/logout", class="btn btn-danger") Выйти

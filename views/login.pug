@@ -1,0 +1,19 @@
+doctype html
+html
+  head
+    title Вход
+    link(rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css")
+  body
+    .container
+      h1 Вход
+      form(action="/login", method="POST")
+        .form-group
+          label(for="email") Электронная почта:
+          input.form-control(type="email", name="email", required)
+        .form-group
+          label(for="password") Пароль:
+          input.form-control(type="password", name="password", required)
+        .form-group
+          button.btn.btn-primary(type="submit") Войти
+      p
+        a(href="/register") Зарегистрироваться

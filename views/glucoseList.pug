@@ -1,0 +1,68 @@
+doctype html
+html
+  head
+    title Записи о глюкозе
+    link(rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css")
+    script(src="https://cdn.jsdelivr.net/npm/chart.js")
+  body
+    .container
+      h1 Записи о глюкозе
+
+      // Кнопка для возврата на главную страницу
+      a.btn.btn-secondary.mb-4(href="/dashboard") На главную
+
+      // Контейнер для графика
+      div(style="width: 600px; margin: auto;")
+        canvas#glucoseChart(width="600" height="400")
+
+      script.
+        const ctx = document.getElementById('glucoseChart').getContext('2d');
+        const glucoseData = !{JSON.stringify(glucoseData)}; // Передаем данные из Pug в JavaScript
+
+        const labels = glucoseData.map(glucose => new Date(glucose.date).toLocaleString());
+        const data = glucoseData.map(glucose => glucose.glucose);
+
+        const glucoseChart = new Chart(ctx, {
+          type: 'line',
+          data: {
+            labels: labels,
+            datasets: [{
+              label: 'Уровень глюкозы (мг/дл)',
+              data: data,
+              borderColor: 'rgba(75, 192, 192, 1)',
+              backgroundColor: 'rgba(75, 192, 192, 0.2)',
+              fill: true,
+            }]
+          },
+          options: {
+            responsive: true,
+            plugins: {
+              tooltip: {
+                callbacks: {
+                  label: function(tooltipItem) {
+                    return `Дата: ${labels[tooltipItem.dataIndex]}, Уровень: ${data[tooltipItem.dataIndex]} мг/дл`;
+                  }
+                }
+              }
+            },
+            scales: {
+              x: {
+                title: {
+                  display: true,
+                  text: 'Время'
+                },
+                ticks: {
+                  autoSkip: false,
+                  maxRotation: 45, // Максимальный угол наклона
+                  minRotation: 45, // Минимальный угол наклона
+                }
+              },
+              y: {
+                title: {
+                  display: true,
+                  text: 'Уровень глюкозы (мг/дл)'
+                }
+              }
+            }
+          }
+        });

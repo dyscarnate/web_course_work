@@ -1,0 +1,14 @@
+doctype html
+html
+  head
+    title Добавить данные о глюкозе
+    link(rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css")
+  body
+    .container
+      h1 Добавить данные о глюкозе
+      form(action="/glucose/add", method="POST")
+        .form-group
+          label(for="glucose") Уровень глюкозы:
+          input.form-control(type="number", name="glucose", required)
+        .form-group
+          button.btn.btn-primary(type="submit") Добавить
