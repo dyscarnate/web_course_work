@@ -19,8 +19,9 @@ html
         const ctx = document.getElementById('glucoseChart').getContext('2d');
         const glucoseData = !{JSON.stringify(glucoseData)}; // Передаем данные из Pug в JavaScript
 
-        const labels = glucoseData.map(glucose => new Date(glucose.date).toLocaleString());
-        const data = glucoseData.map(glucose => glucose.glucose);
+        // Обратный порядок меток и данных
+        const labels = glucoseData.map(glucose => new Date(glucose.date).toLocaleString()).reverse();
+        const data = glucoseData.map(glucose => glucose.glucose).reverse();
 
         const glucoseChart = new Chart(ctx, {
           type: 'line',
@@ -53,8 +54,8 @@ html
                 },
                 ticks: {
                   autoSkip: false,
-                  maxRotation: 45, // Максимальный угол наклона
-                  minRotation: 45, // Минимальный угол наклона
+                  maxRotation: 45, 
+                  minRotation: 45, 
                 }
               },
               y: {

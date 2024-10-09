@@ -15,9 +15,10 @@ html
         const ctx = document.getElementById('headacheChart').getContext('2d');
         const headacheData = !{JSON.stringify(headacheData)};
 
-        const labels = headacheData.map(headache => new Date(headache.date).toLocaleString());
-        const data = headacheData.map(headache => headache.level);
-        const comments = headacheData.map(headache => headache.comment);
+        // Обратный порядок меток, данных и комментариев
+        const labels = headacheData.map(headache => new Date(headache.date).toLocaleString()).reverse();
+        const data = headacheData.map(headache => headache.level).reverse();
+        const comments = headacheData.map(headache => headache.comment).reverse();
 
         const headacheChart = new Chart(ctx, {
           type: 'line',

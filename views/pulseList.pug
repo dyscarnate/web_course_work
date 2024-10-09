@@ -15,8 +15,9 @@ html
         const ctx = document.getElementById('pulseChart').getContext('2d');
         const pulseData = !{JSON.stringify(pulseData)};
 
-        const labels = pulseData.map(pulse => new Date(pulse.date).toLocaleString());
-        const data = pulseData.map(pulse => pulse.pulse);
+        // Обратный порядок меток и данных
+        const labels = pulseData.map(pulse => new Date(pulse.date).toLocaleString()).reverse();
+        const data = pulseData.map(pulse => pulse.pulse).reverse();
 
         const pulseChart = new Chart(ctx, {
           type: 'line',
